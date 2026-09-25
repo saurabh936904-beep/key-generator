@@ -1,110 +1,107 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Detective Key Generator</title>
 
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-<style>
+<!-- AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8534276067922561"
+crossorigin="anonymous"></script>
 
+<style>
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
-    background:#080808;
-    color:#fff;
-    font-family:Arial,sans-serif;
+    margin:0;
+    padding:0;
     min-height:100vh;
+    background:#050505;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .container{
     width:100%;
     max-width:500px;
-    margin:auto;
-    padding:20px;
-}
-
-.page{
-    display:none;
     min-height:100vh;
-    text-align:center;
-}
-
-.page.active{
+    padding:20px;
     display:flex;
-    flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 }
 
 .card{
     width:100%;
-    background:#111;
-    border:1px solid #333;
+    background:#101010;
+    border:1px solid #2c2c2c;
     border-radius:18px;
-    padding:25px 18px;
-    box-shadow:0 0 25px rgba(255,180,0,.08);
-}
-
-.logo{
-    font-size:30px;
-    font-weight:bold;
-    color:#ffd000;
-    margin-bottom:15px;
+    padding:25px 20px;
+    text-align:center;
+    box-shadow:0 0 25px rgba(255,193,7,.08);
 }
 
 h1{
-    font-size:25px;
-    margin-bottom:12px;
+    margin:0 0 12px;
+    color:#ffc107;
+    font-size:28px;
 }
 
 h2{
-    font-size:22px;
-    margin-bottom:15px;
+    color:#ffc107;
+    margin:5px 0 15px;
 }
 
 p{
     color:#bbb;
-    line-height:1.6;
-    margin-bottom:20px;
+    line-height:1.5;
+}
+
+.timer{
+    font-size:42px;
+    font-weight:bold;
+    color:#ffc107;
+    margin:20px 0;
 }
 
 button{
     width:100%;
     border:none;
-    border-radius:12px;
-    padding:15px;
+    border-radius:10px;
+    padding:14px;
     margin-top:12px;
+    background:#ffc107;
+    color:#000;
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
-    background:#ffd000;
-    color:#000;
+}
+
+button:hover{
+    background:#ffca28;
 }
 
 button:disabled{
-    background:#444;
-    color:#888;
+    background:#333;
+    color:#777;
     cursor:not-allowed;
-}
-
-.secondary{
-    background:#222;
-    color:#ffd000;
-    border:1px solid #ffd000;
 }
 
 input{
     width:100%;
-    padding:15px;
+    padding:14px;
     margin-top:10px;
     border-radius:10px;
     border:1px solid #444;
@@ -115,516 +112,360 @@ input{
 }
 
 input:focus{
-    border-color:#ffd000;
+    border-color:#ffc107;
 }
 
-.timer{
-    margin-top:15px;
-    color:#ffd000;
-    font-size:16px;
+.hidden{
+    display:none !important;
 }
 
 .adbox{
-    width:100%;
+    margin:18px auto;
     display:flex;
     justify-content:center;
     align-items:center;
+    min-height:90px;
     overflow:hidden;
-    margin:20px 0;
-    min-height:100px;
 }
 
 .result{
-    display:none;
     margin-top:20px;
-    padding:18px;
-    background:#0b0b0b;
-    border:1px solid #444;
-    border-radius:14px;
+    padding:16px;
+    border:1px solid #333;
+    border-radius:12px;
+    background:#090909;
+}
+
+.keyrow{
+    margin-top:14px;
     text-align:left;
 }
 
-.result label{
-    display:block;
+.label{
     color:#aaa;
     font-size:13px;
     margin-bottom:5px;
 }
 
+.valuebox{
+    display:flex;
+    gap:8px;
+}
+
 .value{
-    background:#181818;
+    flex:1;
+    background:#171717;
+    border:1px solid #333;
     border-radius:8px;
     padding:12px;
-    color:#ffd000;
+    color:#ffc107;
     word-break:break-all;
-    font-weight:bold;
-    margin-bottom:8px;
 }
 
 .copybtn{
-    margin-top:0;
-    margin-bottom:15px;
-    padding:11px;
-    font-size:14px;
+    width:auto;
+    margin:0;
+    padding:10px 14px;
+    flex-shrink:0;
 }
 
 .success{
     color:#00e676;
-    margin-top:15px;
 }
 
 .error{
     color:#ff5252;
-    margin-top:15px;
 }
 
-.lockmsg{
-    display:none;
-    margin-top:20px;
-    padding:15px;
-    border-radius:12px;
-    background:#181818;
-    border:1px solid #444;
-    color:#ffcc00;
+.vip{
+    color:#ffc107;
+    font-weight:bold;
 }
 
+.small{
+    font-size:13px;
+    color:#888;
+}
+
+.back{
+    background:#222;
+    color:#fff;
+}
+
+.back:hover{
+    background:#333;
+}
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
+<!-- PAGE 1 -->
+<div class="card" id="page1">
 
-<!-- =====================================================
-     PAGE 1
-===================================================== -->
+    <h1>Detective Key</h1>
 
-<div id="page1" class="page active">
+    <p>
+        Welcome to Detective Key Generator.
+        Continue to proceed.
+    </p>
 
-    <div class="card">
+    <div class="timer" id="timer1">5</div>
 
-        <div class="logo">
-            DETECTIVE
-        </div>
-
-        <h1>
-            Key Generator
-        </h1>
-
-        <p>
-            Welcome to Detective Key Generator.
-            Continue to proceed.
-        </p>
-
-        <button
-            id="continue1"
-            onclick="goPage(2)"
-            disabled>
-            CONTINUE
-        </button>
-
-        <div
-            id="timer1"
-            class="timer">
-            Please wait 5 seconds...
-        </div>
-
-    </div>
+    <button id="continue1" disabled onclick="showPage(2)">
+        Continue
+    </button>
 
 </div>
 
 
-<!-- =====================================================
-     PAGE 2
-===================================================== -->
+<!-- PAGE 2 -->
+<div class="card hidden" id="page2">
 
-<div id="page2" class="page">
+    <h2>Step 2</h2>
 
-    <div class="card">
+    <p>Please wait until the timer finishes.</p>
 
-        <h2>
-            Step 2
-        </h2>
+    <div class="timer" id="timer2">5</div>
 
-        <p>
-            Please wait for the timer to finish.
-        </p>
+    <div class="adbox">
 
-        <div class="adbox">
+        <script>
+        atOptions = {
+            'key' : 'a0ff1fee43166344bbe546eef861eacc',
+            'format' : 'iframe',
+            'height' : 300,
+            'width' : 160,
+            'params' : {}
+        };
+        </script>
 
-            <script>
-            atOptions = {
-                'key' : 'a0ff1fee43166344bbe546eef861eacc',
-                'format' : 'iframe',
-                'height' : 300,
-                'width' : 160,
-                'params' : {}
-            };
-            </script>
-
-            <script src="https://www.highrevenueformat.com/a0ff1fee43166344bbe546eef861eacc/invoke.js"></script>
-
-        </div>
-
-        <button
-            id="continue2"
-            onclick="goPage(3)"
-            disabled>
-            CONTINUE
-        </button>
-
-        <div
-            id="timer2"
-            class="timer">
-            Please wait 5 seconds...
-        </div>
+        <script src="https://www.highrevenueformat.com/a0ff1fee43166344bbe546eef861eacc/invoke.js"></script>
 
     </div>
+
+    <button id="continue2" disabled onclick="showPage(3)">
+        Continue
+    </button>
 
 </div>
 
 
-<!-- =====================================================
-     PAGE 3
-===================================================== -->
+<!-- PAGE 3 -->
+<div class="card hidden" id="page3">
 
-<div id="page3" class="page">
+    <h2>Step 3</h2>
 
-    <div class="card">
+    <p>Please wait until the timer finishes.</p>
 
-        <h2>
-            Step 3
-        </h2>
+    <div class="timer" id="timer3">5</div>
 
-        <p>
-            Continue after the timer finishes.
-        </p>
+    <div class="adbox">
 
-        <div class="adbox">
+        <script>
+        atOptions = {
+            'key' : '5027d5d3def8d9dcb238c403e4edf617',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+        };
+        </script>
 
-            <script>
-            atOptions = {
-                'key' : '5027d5d3def8d9dcb238c403e4edf617',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
-            </script>
-
-            <script src="https://www.highrevenueformat.com/5027d5d3def8d9dcb238c403e4edf617/invoke.js"></script>
-
-        </div>
-
-        <button
-            id="continue3"
-            onclick="goPage(4)"
-            disabled>
-            CONTINUE
-        </button>
-
-        <div
-            id="timer3"
-            class="timer">
-            Please wait 5 seconds...
-        </div>
+        <script src="https://www.highrevenueformat.com/5027d5d3def8d9dcb238c403e4edf617/invoke.js"></script>
 
     </div>
+
+    <button id="continue3" disabled onclick="showPage(4)">
+        Continue
+    </button>
 
 </div>
 
 
-<!-- =====================================================
-     PAGE 4
-===================================================== -->
+<!-- PAGE 4 -->
+<div class="card hidden" id="page4">
 
-<div id="page4" class="page">
+    <h2>Step 4</h2>
 
-    <div class="card">
+    <p>Please wait until the timer finishes.</p>
 
-        <h2>
-            Step 4
-        </h2>
+    <div class="timer" id="timer4">5</div>
 
-        <p>
-            Almost there. Wait and continue.
-        </p>
+    <div class="adbox">
 
-        <div class="adbox">
+        <script>
+        atOptions = {
+            'key' : 'cd4c9d9e274e9e4ad00d888c1823737f',
+            'format' : 'iframe',
+            'height' : 60,
+            'width' : 468,
+            'params' : {}
+        };
+        </script>
 
-            <script>
-            atOptions = {
-                'key' : 'cd4c9d9e274e9e4ad00d888c1823737f',
-                'format' : 'iframe',
-                'height' : 60,
-                'width' : 468,
-                'params' : {}
-            };
-            </script>
-
-            <script src="https://www.highrevenueformat.com/cd4c9d9e274e9e4ad00d888c1823737f/invoke.js"></script>
-
-        </div>
-
-        <button
-            id="continue4"
-            onclick="goPage(5)"
-            disabled>
-            CONTINUE
-        </button>
-
-        <div
-            id="timer4"
-            class="timer">
-            Please wait 5 seconds...
-        </div>
+        <script src="https://www.highrevenueformat.com/cd4c9d9e274e9e4ad00d888c1823737f/invoke.js"></script>
 
     </div>
+
+    <button id="continue4" disabled onclick="showPage(5)">
+        Continue
+    </button>
 
 </div>
 
 
-<!-- =====================================================
-     PAGE 5
-===================================================== -->
+<!-- PAGE 5 -->
+<div class="card hidden" id="page5">
 
-<div id="page5" class="page">
+    <h2>Step 5</h2>
 
-    <div class="card">
+    <p>Please wait until the timer finishes.</p>
 
-        <h2>
-            Step 5
-        </h2>
+    <div class="timer" id="timer5">5</div>
 
-        <p>
-            Final step. Wait for the timer.
-        </p>
+    <div class="adbox">
 
-        <div class="adbox">
+        <script>
+        atOptions = {
+            'key' : '35305d7d070cb0107c589a78c760b427',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+        };
+        </script>
 
-            <script>
-            atOptions = {
-                'key' : '35305d7d070cb0107c589a78c760b427',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-            };
-            </script>
-
-            <script src="https://www.highrevenueformat.com/35305d7d070cb0107c589a78c760b427/invoke.js"></script>
-
-        </div>
-
-        <button
-            id="continue5"
-            onclick="goPage(6)"
-            disabled>
-            CONTINUE
-        </button>
-
-        <div
-            id="timer5"
-            class="timer">
-            Please wait 5 seconds...
-        </div>
+        <script src="https://www.highrevenueformat.com/35305d7d070cb0107c589a78c760b427/invoke.js"></script>
 
     </div>
+
+    <button id="continue5" disabled onclick="showFinalPage()">
+        Continue
+    </button>
 
 </div>
 
 
-<!-- =====================================================
-     FINAL PAGE
-===================================================== -->
+<!-- FINAL PAGE -->
+<div class="card hidden" id="finalPage">
 
-<div id="finalPage" class="page">
+    <h2>Detective Key</h2>
 
-    <div class="card">
+    <p>
+        Choose an option
+    </p>
 
-        <div class="logo">
-            FINAL
-        </div>
+    <button id="createButton" onclick="openCreatePage()">
+        CREATE NEW
+    </button>
 
-        <h2>
-            Choose an Option
-        </h2>
+    <button id="extendButton" onclick="openExtendPage()">
+        EXIST / EXTEND TIME
+    </button>
 
-        <p>
-            You can perform only one action.
-        </p>
-
-        <button
-            id="createButton"
-            onclick="openCreatePage()">
-            CREATE NEW
-        </button>
-
-        <button
-            id="extendButton"
-            class="secondary"
-            onclick="openExtendPage()">
-            EXIST / EXTEND TIME
-        </button>
-
-        <div
-            id="lockMessage"
-            class="lockmsg">
-
-            This session has already been used.
-            Refresh the page to start again.
-
-        </div>
-
-    </div>
+    <p class="small">
+        One successful action is allowed per session.
+        Refresh starts the process again.
+    </p>
 
 </div>
 
 
-<!-- =====================================================
-     CREATE PAGE
-===================================================== -->
+<!-- CREATE PAGE -->
+<div class="card hidden" id="createPage">
 
-<div id="createPage" class="page">
+    <h2>Create New Key</h2>
 
-    <div class="card">
+    <p>
+        A new key will be created for exactly
+        <b class="vip">4 hours</b>.
+    </p>
 
-        <h2>
-            Create New Key
-        </h2>
+    <button id="generateButton" onclick="createNewUser()">
+        CREATE KEY
+    </button>
 
-        <p>
-            New username and password will be generated.
-            Key validity: exactly 4 hours.
-        </p>
+    <div id="createResult" class="result hidden">
 
-        <button
-            id="generateButton"
-            onclick="createNewUser()">
-
-            CREATE NEW KEY
-
-        </button>
-
-        <div
-            id="createLoading"
-            class="timer"
-            style="display:none;">
-
-            Creating key...
-
+        <div class="success">
+            Key Created Successfully
         </div>
 
-        <div
-            id="createError"
-            class="error">
-        </div>
+        <div class="keyrow">
 
-        <div
-            id="createResult"
-            class="result">
-
-            <label>
+            <div class="label">
                 Username
-            </label>
-
-            <div
-                id="newUsername"
-                class="value">
             </div>
 
-            <button
-                class="secondary copybtn"
-                onclick="copyUsername()">
+            <div class="valuebox">
 
-                COPY USERNAME
+                <div id="resultUsername" class="value"></div>
 
-            </button>
-
-            <label>
-                Password
-            </label>
-
-            <div
-                id="newPassword"
-                class="value">
-            </div>
-
-            <button
-                class="secondary copybtn"
-                onclick="copyPassword()">
-
-                COPY PASSWORD
-
-            </button>
-
-            <div class="success">
-
-                Key created successfully.
-                Valid for exactly 4 hours.
+                <button
+                    class="copybtn"
+                    onclick="copyText('resultUsername')">
+                    Copy
+                </button>
 
             </div>
 
         </div>
+
+
+        <div class="keyrow">
+
+            <div class="label">
+                Password
+            </div>
+
+            <div class="valuebox">
+
+                <div id="resultPassword" class="value"></div>
+
+                <button
+                    class="copybtn"
+                    onclick="copyText('resultPassword')">
+                    Copy
+                </button>
+
+            </div>
+
+        </div>
+
+        <p class="small">
+            Validity: Exactly 4 Hours
+        </p>
 
     </div>
 
 </div>
 
 
-<!-- =====================================================
-     EXTEND PAGE
-===================================================== -->
+<!-- EXTEND PAGE -->
+<div class="card hidden" id="extendPage">
 
-<div id="extendPage" class="page">
+    <h2>Extend Key</h2>
 
-    <div class="card">
+    <p>
+        Enter your existing username.
+        Normal key will be extended by exactly 4 hours.
+    </p>
 
-        <h2>
-            Extend Time
-        </h2>
+    <input
+        type="text"
+        id="extendUsername"
+        placeholder="Enter Username"
+        autocomplete="off"
+    >
 
-        <p>
-            Enter your existing premium username.
-            4 hours will be added.
-        </p>
+    <button id="extendButton2" onclick="extendTime()">
+        EXTEND +4 HOURS
+    </button>
 
-        <input
-            id="extendUsername"
-            type="text"
-            placeholder="Enter your username"
-            autocomplete="off">
-
-        <button
-            id="extendButton2"
-            onclick="extendTime()">
-
-            EXTEND TIME
-
-        </button>
-
-        <div
-            id="extendLoading"
-            class="timer"
-            style="display:none;">
-
-            Processing...
-
-        </div>
-
-        <div
-            id="extendError"
-            class="error">
-        </div>
-
-        <div
-            id="extendSuccess"
-            class="success">
-        </div>
-
-    </div>
+    <div id="extendResult" class="result hidden"></div>
 
 </div>
 
@@ -634,395 +475,293 @@ input:focus{
 
 <script>
 
-/* =====================================================
-   FIREBASE
-===================================================== */
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
 
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyDxCzFBgmn_CTfv-EReAE8ifHH_Ab7Gztk",
+    apiKey: "AIzaSyDxCzFBgmn_CTfv-EReAE8ifHH_Ab7Gztk",
 
-    authDomain:
-    "me-me-290a5.firebaseapp.com",
+    authDomain: "me-me-290a5.firebaseapp.com",
 
     databaseURL:
-    "https://me-me-290a5-default-rtdb.firebaseio.com/",
+        "https://me-me-290a5-default-rtdb.firebaseio.com/",
 
-    projectId:
-    "me-me-290a5",
+    projectId: "me-me-290a5",
 
     storageBucket:
-    "me-me-290a5.firebasestorage.app",
+        "me-me-290a5.firebasestorage.app",
 
     messagingSenderId:
-    "916593241654",
+        "916593241654",
 
     appId:
-    "1:916593241654:web:3997e3c2d4a324da3bb297",
+        "1:916593241654:web:3997e3c2d4a324da3bb297",
 
     measurementId:
-    "G-VCL5QDX8N5"
-
+        "G-VCL5QDX8N5"
 };
 
 
 firebase.initializeApp(firebaseConfig);
 
 
-const db =
+const database =
     firebase.database();
 
 
 const usersRef =
-    db.ref("DetectivePanel/User");
+    database.ref("DetectivePanel/User");
 
 
-const serverOffsetRef =
-    db.ref(".info/serverTimeOffset");
+/* =========================================================
+   FIREBASE SERVER TIME SYNC
+========================================================= */
 
+const serverTimeOffsetRef =
+    database.ref(".info/serverTimeOffset");
 
-/* =====================================================
-   SERVER TIME
-===================================================== */
 
 let serverOffset = 0;
 
 
-serverOffsetRef.on(
-    "value",
-    function(snapshot){
+serverTimeOffsetRef.on("value", function(snapshot){
 
-        const value =
-            snapshot.val();
+    const value = snapshot.val();
 
-        if(typeof value === "number"){
-
-            serverOffset =
-                value;
-
-        }
-
+    if(typeof value === "number"){
+        serverOffset = value;
     }
-);
+
+});
 
 
-function getServerTime(){
-
-    return Date.now() +
-           serverOffset;
-
+// Direct Synchronous Server Time Function (Milliseconds)
+function getSyncServerTime(){
+    return Date.now() + serverOffset;
 }
 
 
-/* =====================================================
-   SESSION
-===================================================== */
+/* =========================================================
+   SESSION ACTION LOCK
+========================================================= */
 
 let actionUsed = false;
 
 
-/* =====================================================
-   SHOW PAGE
-===================================================== */
+/* =========================================================
+   PAGE FUNCTIONS
+========================================================= */
 
-function showPage(pageId){
+function hideAllPages(){
 
-    const pages =
-        document.querySelectorAll(".page");
+    const pages = [
+
+        "page1",
+        "page2",
+        "page3",
+        "page4",
+        "page5",
+        "finalPage",
+        "createPage",
+        "extendPage"
+
+    ];
 
 
-    pages.forEach(
-        function(page){
+    for(let i = 0; i < pages.length; i++){
 
-            page.classList.remove(
-                "active"
-            );
+        document
+            .getElementById(pages[i])
+            .classList.add("hidden");
 
-        }
-    );
+    }
 
+}
+
+
+function showPage(number){
+
+    hideAllPages();
 
     const page =
-        document.getElementById(
-            pageId
-        );
-
+        document.getElementById("page" + number);
 
     if(page){
 
-        page.classList.add(
-            "active"
-        );
+        page.classList.remove("hidden");
+
+        startTimer(number);
 
     }
 
 }
 
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function goPage(number){
-
-    if(number === 2){
-
-        showPage("page2");
-        startTimer(2);
-
-    }
-
-    else if(number === 3){
-
-        showPage("page3");
-        startTimer(3);
-
-    }
-
-    else if(number === 4){
-
-        showPage("page4");
-        startTimer(4);
-
-    }
-
-    else if(number === 5){
-
-        showPage("page5");
-        startTimer(5);
-
-    }
-
-    else if(number === 6){
-
-        showFinalPage();
-
-    }
-
-}
-
-
-/* =====================================================
-   5 SECOND TIMER
-===================================================== */
-
-const timerRunning = {};
-
-
-function startTimer(pageNumber){
-
-    if(timerRunning[pageNumber]){
-
-        return;
-
-    }
-
-
-    timerRunning[pageNumber] =
-        true;
-
-
-    let seconds = 5;
-
-
-    const button =
-        document.getElementById(
-            "continue" +
-            pageNumber
-        );
-
-
-    const timer =
-        document.getElementById(
-            "timer" +
-            pageNumber
-        );
-
-
-    if(button){
-
-        button.disabled =
-            true;
-
-    }
-
-
-    if(timer){
-
-        timer.innerText =
-            "Please wait " +
-            seconds +
-            " seconds...";
-
-    }
-
-
-    const interval =
-        setInterval(
-            function(){
-
-                seconds--;
-
-
-                if(timer){
-
-                    if(seconds > 0){
-
-                        timer.innerText =
-                            "Please wait " +
-                            seconds +
-                            " seconds...";
-
-                    }
-
-                    else{
-
-                        timer.innerText =
-                            "You can continue.";
-
-                    }
-
-                }
-
-
-                if(seconds <= 0){
-
-                    clearInterval(
-                        interval
-                    );
-
-
-                    if(button){
-
-                        button.disabled =
-                            false;
-
-                    }
-
-
-                    timerRunning[
-                        pageNumber
-                    ] = false;
-
-                }
-
-            },
-            1000
-        );
-
-}
-
-
-/* =====================================================
-   FINAL PAGE
-===================================================== */
 
 function showFinalPage(){
 
-    showPage(
-        "finalPage"
-    );
+    hideAllPages();
+
+    document
+        .getElementById("finalPage")
+        .classList.remove("hidden");
 
     updateFinalButtons();
 
 }
 
 
+/* =========================================================
+   TIMER
+========================================================= */
+
+const timerStarted = {};
+
+
+function startTimer(pageNumber){
+
+    if(timerStarted[pageNumber]){
+        return;
+    }
+
+
+    timerStarted[pageNumber] = true;
+
+
+    let seconds = 5;
+
+
+    const timerElement =
+        document.getElementById("timer" + pageNumber);
+
+
+    const continueButton =
+        document.getElementById("continue" + pageNumber);
+
+
+    if(!timerElement || !continueButton){
+        return;
+    }
+
+
+    timerElement.textContent = seconds;
+
+
+    continueButton.disabled = true;
+
+
+    const interval =
+        setInterval(function(){
+
+            seconds--;
+
+
+            timerElement.textContent = seconds;
+
+
+            if(seconds <= 0){
+
+                clearInterval(interval);
+
+
+                timerElement.textContent = "✓";
+
+
+                continueButton.disabled = false;
+
+            }
+
+        },1000);
+
+}
+
+
+/* =========================================================
+   FINAL BUTTON LOCK
+========================================================= */
+
 function updateFinalButtons(){
 
     const createButton =
-        document.getElementById(
-            "createButton"
-        );
-
+        document.getElementById("createButton");
 
     const extendButton =
-        document.getElementById(
-            "extendButton"
-        );
-
-
-    const lockMessage =
-        document.getElementById(
-            "lockMessage"
-        );
+        document.getElementById("extendButton");
 
 
     if(actionUsed){
 
-        createButton.disabled =
-            true;
+        createButton.disabled = true;
 
-        extendButton.disabled =
-            true;
+        extendButton.disabled = true;
 
-        lockMessage.style.display =
-            "block";
+    }else{
 
-    }
+        createButton.disabled = false;
 
-    else{
-
-        createButton.disabled =
-            false;
-
-        extendButton.disabled =
-            false;
-
-        lockMessage.style.display =
-            "none";
+        extendButton.disabled = false;
 
     }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    CREATE PAGE
-===================================================== */
+========================================================= */
 
 function openCreatePage(){
 
     if(actionUsed){
 
+        alert("You have already used your action.");
+
         return;
 
     }
 
 
-    showPage(
-        "createPage"
-    );
+    hideAllPages();
+
+
+    document
+        .getElementById("createPage")
+        .classList.remove("hidden");
 
 }
 
 
-/* =====================================================
+/* =========================================================
    EXTEND PAGE
-===================================================== */
+========================================================= */
 
 function openExtendPage(){
 
     if(actionUsed){
 
+        alert("You have already used your action.");
+
         return;
 
     }
 
 
-    showPage(
-        "extendPage"
-    );
+    hideAllPages();
+
+
+    document
+        .getElementById("extendPage")
+        .classList.remove("hidden");
 
 }
 
 
-/* =====================================================
-   RANDOM CHARACTERS
-===================================================== */
+/* =========================================================
+   RANDOM ALPHANUMERIC
+========================================================= */
 
-function randomCharacters(length){
+function randomAlphaNumeric(length){
 
     const chars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -1031,17 +770,12 @@ function randomCharacters(length){
     let result = "";
 
 
-    for(
-        let i = 0;
-        i < length;
-        i++
-    ){
+    for(let i = 0; i < length; i++){
 
         result +=
             chars.charAt(
                 Math.floor(
-                    Math.random() *
-                    chars.length
+                    Math.random() * chars.length
                 )
             );
 
@@ -1053,444 +787,187 @@ function randomCharacters(length){
 }
 
 
-/* =====================================================
-   CREATE USERNAME
-   Detective = 9
-   Random = 6
-   Total = 15
-===================================================== */
-
-function generateUsername(){
-
-    return "Detective" +
-           randomCharacters(6);
-
-}
-
-
-/* =====================================================
-   CREATE PASSWORD
-===================================================== */
-
-function generatePassword(){
-
-    return randomCharacters(6);
-
-}
-
-
-/* =====================================================
+/* =========================================================
    CREATE NEW USER
-===================================================== */
+========================================================= */
 
 async function createNewUser(){
 
     if(actionUsed){
 
-        alert(
-            "This session has already been used."
-        );
+        alert("Action already used. Refresh the page to create another key.");
 
         return;
 
     }
 
 
-    const generateButton =
-        document.getElementById(
-            "generateButton"
-        );
+    const button =
+        document.getElementById("generateButton");
 
 
-    const loading =
-        document.getElementById(
-            "createLoading"
-        );
-
-
-    const error =
-        document.getElementById(
-            "createError"
-        );
-
-
-    const result =
-        document.getElementById(
-            "createResult"
-        );
-
-
-    error.innerText = "";
-
-
-    result.style.display =
-        "none";
-
-
-    generateButton.disabled =
-        true;
-
-
-    loading.style.display =
-        "block";
+    button.disabled = true;
 
 
     try{
 
-
-        let username = "";
-
-        let userExists = true;
+        let username;
 
 
-        /*
-           Unique username
-        */
+        let exists = true;
 
-        for(
-            let attempt = 0;
-            attempt < 20;
-            attempt++
-        ){
+
+        while(exists){
 
             username =
-                generateUsername();
+                "Detective" +
+                randomAlphaNumeric(6);
 
 
-            const snapshot =
+            const check =
                 await usersRef
-                .child(username)
-                .get();
+                    .child(username)
+                    .get();
 
 
-            if(!snapshot.exists()){
-
-                userExists =
-                    false;
-
-                break;
-
-            }
-
-        }
-
-
-        if(userExists){
-
-            throw new Error(
-                "Unique username generate nahi ho paya."
-            );
+            exists =
+                check.exists();
 
         }
 
 
         const password =
-            generatePassword();
+            randomAlphaNumeric(6);
 
 
         /*
-           CURRENT FIREBASE SERVER TIME
-        */
+         * STRICT MILLISECONDS SERVER TIME
+         */
 
         const now =
-            getServerTime();
+            getSyncServerTime();
 
 
         /*
-           EXACTLY 4 HOURS
-
-           4 hours
-           × 60 minutes
-           × 60 seconds
-           × 1000 milliseconds
-        */
+         * EXACTLY 4 HOURS IN MILLISECONDS (4 * 3600 * 1000 = 14400000)
+         */
 
         const fourHours =
-            4 *
-            60 *
-            60 *
-            1000;
+            4 * 60 * 60 * 1000;
+
+
+        const expire =
+            now + fourHours;
 
 
         /*
-           NO 24 HOURS HERE
-           NO 1 DAY HERE
-
-           expire = now + exactly 4 hours
-        */
-
-        const expire =
-            now +
-            fourHours;
-
+         * Firebase data
+         */
 
         const data = {
 
-            username:
-                username,
+            username: username,
 
-            password:
-                password,
+            password: password,
 
-            device:
-                "1",
+            device: "1",
 
-            create:
-                String(now),
+            create: String(now),
 
-            deactivate:
-                String(now),
+            deactivate: String(now),
 
-            expire:
-                String(expire),
+            expire: String(expire),
 
-            activate:
-                true,
+            activate: true,
 
-            hack:
-                true,
+            hack: true,
 
-            loc:
-                true,
+            loc: true,
 
-            hack_loc:
-                true,
+            hack_loc: true,
 
-            hack70:
-                true,
+            hack70: true,
 
-            hack80:
-                true,
+            hack80: true,
 
-            hack90:
-                true,
+            hack90: true,
 
-            hack100:
-                true,
+            hack100: true,
 
-            hack110:
-                true
+            hack110: true
 
         };
 
 
         /*
-           SAVE TO FIREBASE
-        */
+         * Save
+         */
 
         await usersRef
-        .child(username)
-        .set(data);
+            .child(username)
+            .set(data);
 
 
         /*
-           ONLY AFTER SUCCESS
-           LOCK THIS SESSION
-        */
+         * LOCK ACTION
+         */
 
-        actionUsed =
-            true;
+        actionUsed = true;
 
 
-        document.getElementById(
-            "newUsername"
-        ).innerText =
-            username;
+        /*
+         * Show result
+         */
 
+        document
+            .getElementById("resultUsername")
+            .textContent = username;
 
-        document.getElementById(
-            "newPassword"
-        ).innerText =
-            password;
 
+        document
+            .getElementById("resultPassword")
+            .textContent = password;
 
-        result.style.display =
-            "block";
 
+        document
+            .getElementById("createResult")
+            .classList.remove("hidden");
 
-        loading.style.display =
-            "none";
 
+        button.disabled = true;
 
-        generateButton.disabled =
-            true;
 
+        updateFinalButtons();
 
-    }
 
-    catch(errorObject){
+    }catch(error){
 
-        loading.style.display =
-            "none";
+        console.error(error);
 
-
-        generateButton.disabled =
-            false;
-
-
-        error.innerText =
-            "Error: " +
-            errorObject.message;
-
-    }
-
-}
-
-
-/* =====================================================
-   COPY USERNAME
-===================================================== */
-
-function copyUsername(){
-
-    const username =
-        document.getElementById(
-            "newUsername"
-        ).innerText;
-
-
-    copyText(
-        username,
-        "Username copied"
-    );
-
-}
-
-
-/* =====================================================
-   COPY PASSWORD
-===================================================== */
-
-function copyPassword(){
-
-    const password =
-        document.getElementById(
-            "newPassword"
-        ).innerText;
-
-
-    copyText(
-        password,
-        "Password copied"
-    );
-
-}
-
-
-/* =====================================================
-   COPY
-===================================================== */
-
-function copyText(
-    text,
-    message
-){
-
-    if(
-        navigator.clipboard &&
-        navigator.clipboard.writeText
-    ){
-
-        navigator.clipboard
-        .writeText(text)
-        .then(
-            function(){
-
-                alert(message);
-
-            }
-        )
-        .catch(
-            function(){
-
-                fallbackCopy(text);
-
-            }
-        );
-
-    }
-
-    else{
-
-        fallbackCopy(text);
-
-    }
-
-}
-
-
-/* =====================================================
-   COPY FALLBACK
-===================================================== */
-
-function fallbackCopy(text){
-
-    const textarea =
-        document.createElement(
-            "textarea"
-        );
-
-
-    textarea.value =
-        text;
-
-
-    textarea.style.position =
-        "fixed";
-
-
-    textarea.style.left =
-        "-9999px";
-
-
-    document.body.appendChild(
-        textarea
-    );
-
-
-    textarea.focus();
-
-    textarea.select();
-
-
-    try{
-
-        document.execCommand(
-            "copy"
-        );
 
         alert(
-            "Copied"
+            "Key create nahi hua:\n" +
+            error.message
         );
 
-    }
 
-    catch(error){
-
-        alert(
-            "Copy failed"
-        );
+        button.disabled = false;
 
     }
-
-
-    document.body.removeChild(
-        textarea
-    );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    EXTEND TIME
-===================================================== */
+========================================================= */
 
 async function extendTime(){
 
     if(actionUsed){
 
         alert(
-            "This session has already been used."
+            "Action already used. Refresh the page to try again."
         );
 
         return;
@@ -1499,74 +976,40 @@ async function extendTime(){
 
 
     const input =
-        document.getElementById(
-            "extendUsername"
-        );
-
-
-    const loading =
-        document.getElementById(
-            "extendLoading"
-        );
-
-
-    const error =
-        document.getElementById(
-            "extendError"
-        );
-
-
-    const success =
-        document.getElementById(
-            "extendSuccess"
-        );
-
-
-    const button =
-        document.getElementById(
-            "extendButton2"
-        );
-
-
-    error.innerText = "";
-
-    success.innerText = "";
+        document.getElementById("extendUsername");
 
 
     const username =
         input.value.trim();
 
 
-    /*
-       Premium username ki
-       koi length restriction nahi.
-    */
+    const result =
+        document.getElementById("extendResult");
+
 
     if(username.length === 0){
 
-        error.innerText =
-            "Please enter your username.";
+        alert("Username enter karo.");
 
         return;
 
     }
 
 
-    button.disabled =
-        true;
+    const button =
+        document.getElementById("extendButton2");
 
 
-    loading.style.display =
-        "block";
+    button.disabled = true;
+
+
+    result.classList.add("hidden");
 
 
     try{
 
-
         const userRef =
-            usersRef.child(
-                username
-            );
+            usersRef.child(username);
 
 
         const snapshot =
@@ -1586,30 +1029,40 @@ async function extendTime(){
             snapshot.val();
 
 
-        /*
-           CURRENT SERVER TIME
-        */
-
-        const now =
-            getServerTime();
+        const expireValue =
+            data.expire;
 
 
-        /*
-           EXACTLY 4 HOURS
-        */
+        if(
+            String(expireValue)
+                .trim()
+                .toLowerCase()
+            ===
+            "unlimited"
+        ){
 
-        const fourHours =
-            4 *
-            60 *
-            60 *
-            1000;
+            result.innerHTML =
+                '<div class="vip">' +
+                'VIP KEY' +
+                '</div>' +
+                '<p>' +
+                'Is username ka expire Unlimited hai. ' +
+                'VIP key ka time extend nahi kiya ja sakta.' +
+                '</p>';
+
+
+            result.classList.remove("hidden");
+
+
+            button.disabled = true;
+
+            return;
+
+        }
 
 
         const oldExpire =
-            parseInt(
-                data.expire,
-                10
-            );
+            parseInt(expireValue, 10);
 
 
         if(isNaN(oldExpire)){
@@ -1621,125 +1074,186 @@ async function extendTime(){
         }
 
 
-        let newExpire;
+        const now =
+            getSyncServerTime();
 
 
         /*
-           EXPIRED
-           current server time + 4 hours
-        */
+         * EXACTLY 4 HOURS
+         */
+
+        const fourHours =
+            4 * 60 * 60 * 1000;
+
+
+        let newExpire;
+
 
         if(oldExpire <= now){
 
             newExpire =
-                now +
-                fourHours;
+                now + fourHours;
 
-        }
-
-
-        /*
-           NOT EXPIRED
-           existing expire + 4 hours
-        */
-
-        else{
+        }else{
 
             newExpire =
-                oldExpire +
-                fourHours;
+                oldExpire + fourHours;
 
         }
 
-
-        /*
-           UPDATE FIREBASE
-        */
 
         await userRef.update({
 
-            expire:
-                String(
-                    newExpire
-                ),
+            expire: String(newExpire),
 
-            deactivate:
-                String(
-                    now
-                )
+            deactivate: String(now)
 
         });
 
 
-        /*
-           SUCCESS
-        */
-
-        actionUsed =
-            true;
+        actionUsed = true;
 
 
-        loading.style.display =
-            "none";
+        result.innerHTML =
+            '<div class="success">' +
+            'KEY EXTENDED SUCCESSFULLY' +
+            '</div>' +
+            '<p>' +
+            'Username: <b>' +
+            escapeHtml(username) +
+            '</b>' +
+            '</p>' +
+            '<p>' +
+            'Exactly +4 Hours added.' +
+            '</p>';
 
 
-        success.innerText =
-            "4 hours successfully extended.";
+        result.classList.remove("hidden");
 
 
-        button.disabled =
-            true;
+        updateFinalButtons();
 
 
-    }
+    }catch(error){
 
-    catch(errorObject){
-
-        loading.style.display =
-            "none";
+        console.error(error);
 
 
-        button.disabled =
-            false;
+        result.innerHTML =
+            '<div class="error">' +
+            escapeHtml(error.message) +
+            '</div>';
 
 
-        error.innerText =
-            "Error: " +
-            errorObject.message;
+        result.classList.remove("hidden");
+
+
+        button.disabled = false;
 
     }
 
 }
 
 
-/* =====================================================
-   REFRESH
-===================================================== */
+/* =========================================================
+   COPY
+========================================================= */
 
-window.addEventListener(
-    "load",
-    function(){
+function copyText(elementId){
 
-        /*
-           Refresh = new session
-
-           Page 1 se start
-           actionUsed false
-        */
-
-        actionUsed =
-            false;
+    const element =
+        document.getElementById(elementId);
 
 
-        showPage(
-            "page1"
-        );
+    const text =
+        element.textContent;
 
 
-        startTimer(1);
+    if(
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+    ){
+
+        navigator.clipboard
+            .writeText(text)
+            .then(function(){
+
+                alert("Copied!");
+
+            })
+            .catch(function(){
+
+                fallbackCopy(text);
+
+            });
+
+    }else{
+
+        fallbackCopy(text);
 
     }
-);
+
+}
+
+
+function fallbackCopy(text){
+
+    const textarea =
+        document.createElement("textarea");
+
+
+    textarea.value = text;
+
+
+    document.body.appendChild(textarea);
+
+
+    textarea.select();
+
+
+    try{
+
+        document.execCommand("copy");
+
+        alert("Copied!");
+
+    }catch(error){
+
+        alert("Copy failed. Manually copy it.");
+
+    }
+
+
+    document.body.removeChild(textarea);
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   START PAGE 1
+========================================================= */
+
+window.addEventListener("load",function(){
+
+    startTimer(1);
+
+});
 
 </script>
 
