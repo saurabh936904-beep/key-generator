@@ -222,13 +222,17 @@ input:focus{
             id="continue1"
             onclick="goPage(2)"
             disabled>
+
             CONTINUE
+
         </button>
 
         <div
             id="timer1"
             class="timer">
+
             Please wait 5 seconds...
+
         </div>
 
     </div>
@@ -272,13 +276,17 @@ input:focus{
             id="continue2"
             onclick="goPage(3)"
             disabled>
+
             CONTINUE
+
         </button>
 
         <div
             id="timer2"
             class="timer">
+
             Please wait 5 seconds...
+
         </div>
 
     </div>
@@ -322,13 +330,17 @@ input:focus{
             id="continue3"
             onclick="goPage(4)"
             disabled>
+
             CONTINUE
+
         </button>
 
         <div
             id="timer3"
             class="timer">
+
             Please wait 5 seconds...
+
         </div>
 
     </div>
@@ -372,13 +384,17 @@ input:focus{
             id="continue4"
             onclick="goPage(5)"
             disabled>
+
             CONTINUE
+
         </button>
 
         <div
             id="timer4"
             class="timer">
+
             Please wait 5 seconds...
+
         </div>
 
     </div>
@@ -422,13 +438,17 @@ input:focus{
             id="continue5"
             onclick="goPage(6)"
             disabled>
+
             CONTINUE
+
         </button>
 
         <div
             id="timer5"
             class="timer">
+
             Please wait 5 seconds...
+
         </div>
 
     </div>
@@ -459,14 +479,29 @@ input:focus{
         <button
             id="createButton"
             onclick="openCreatePage()">
+
             CREATE NEW
+
         </button>
 
         <button
             id="extendButton"
             class="secondary"
             onclick="openExtendPage()">
+
             EXIST / EXTEND TIME
+
+        </button>
+
+        <!-- NEW GET KEY OPTION -->
+
+        <button
+            id="getKeyButton"
+            class="secondary"
+            onclick="openGetKeyPage()">
+
+            GET KEY
+
         </button>
 
         <div
@@ -629,6 +664,80 @@ input:focus{
 </div>
 
 
+<!-- =====================================================
+     GET KEY PAGE
+===================================================== -->
+
+<div id="getKeyPage" class="page">
+
+    <div class="card">
+
+        <h2>
+            Get Key
+        </h2>
+
+        <p>
+            Generate your unique key.
+            Key validity: exactly 4 hours.
+        </p>
+
+        <button
+            id="getKeyGenerateButton"
+            onclick="generateGetKey()">
+
+            GET KEY
+
+        </button>
+
+        <div
+            id="getKeyLoading"
+            class="timer"
+            style="display:none;">
+
+            Generating key...
+
+        </div>
+
+        <div
+            id="getKeyError"
+            class="error">
+        </div>
+
+        <div
+            id="getKeyResult"
+            class="result">
+
+            <label>
+                Your Key
+            </label>
+
+            <div
+                id="generatedKey"
+                class="value">
+            </div>
+
+            <button
+                class="secondary copybtn"
+                onclick="copyGeneratedKey()">
+
+                COPY KEY
+
+            </button>
+
+            <div class="success">
+
+                Key generated successfully.
+                Valid for 4 hours.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 </div>
 
 
@@ -641,7 +750,7 @@ input:focus{
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyDxCzFBgmn_CTfv-EReAE8ifHH_Ab7Gztk",
+    "AIzaSyDxCzFBmgn_CTfv-EReAE8ifHH_Ab7Gztk",
 
     authDomain:
     "me-me-290a5.firebaseapp.com",
@@ -667,7 +776,9 @@ const firebaseConfig = {
 };
 
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(
+    firebaseConfig
+);
 
 
 const db =
@@ -675,11 +786,21 @@ const db =
 
 
 const usersRef =
-    db.ref("DetectivePanel/User");
+    db.ref(
+        "DetectivePanel/User"
+    );
+
+
+const keysRef =
+    db.ref(
+        "DetectivePanel/key"
+    );
 
 
 const serverOffsetRef =
-    db.ref(".info/serverTimeOffset");
+    db.ref(
+        ".info/serverTimeOffset"
+    );
 
 
 /* =====================================================
@@ -729,7 +850,9 @@ let actionUsed = false;
 function showPage(pageId){
 
     const pages =
-        document.querySelectorAll(".page");
+        document.querySelectorAll(
+            ".page"
+        );
 
 
     pages.forEach(
@@ -768,28 +891,40 @@ function goPage(number){
 
     if(number === 2){
 
-        showPage("page2");
+        showPage(
+            "page2"
+        );
+
         startTimer(2);
 
     }
 
     else if(number === 3){
 
-        showPage("page3");
+        showPage(
+            "page3"
+        );
+
         startTimer(3);
 
     }
 
     else if(number === 4){
 
-        showPage("page4");
+        showPage(
+            "page4"
+        );
+
         startTimer(4);
 
     }
 
     else if(number === 5){
 
-        showPage("page5");
+        showPage(
+            "page5"
+        );
+
         startTimer(5);
 
     }
@@ -943,6 +1078,12 @@ function updateFinalButtons(){
         );
 
 
+    const getKeyButton =
+        document.getElementById(
+            "getKeyButton"
+        );
+
+
     const lockMessage =
         document.getElementById(
             "lockMessage"
@@ -957,6 +1098,9 @@ function updateFinalButtons(){
         extendButton.disabled =
             true;
 
+        getKeyButton.disabled =
+            true;
+
         lockMessage.style.display =
             "block";
 
@@ -968,6 +1112,9 @@ function updateFinalButtons(){
             false;
 
         extendButton.disabled =
+            false;
+
+        getKeyButton.disabled =
             false;
 
         lockMessage.style.display =
@@ -1019,6 +1166,26 @@ function openExtendPage(){
 
 
 /* =====================================================
+   GET KEY PAGE
+===================================================== */
+
+function openGetKeyPage(){
+
+    if(actionUsed){
+
+        return;
+
+    }
+
+
+    showPage(
+        "getKeyPage"
+    );
+
+}
+
+
+/* =====================================================
    RANDOM CHARACTERS
 ===================================================== */
 
@@ -1055,9 +1222,6 @@ function randomCharacters(length){
 
 /* =====================================================
    CREATE USERNAME
-   Detective = 9
-   Random = 6
-   Total = 15
 ===================================================== */
 
 function generateUsername(){
@@ -1075,6 +1239,21 @@ function generateUsername(){
 function generatePassword(){
 
     return randomCharacters(6);
+
+}
+
+
+/* =====================================================
+   GET KEY GENERATOR
+===================================================== */
+
+function generateGetKeyValue(){
+
+    /*
+       16 characters unique key
+    */
+
+    return randomCharacters(16);
 
 }
 
@@ -1137,14 +1316,13 @@ async function createNewUser(){
 
     try{
 
-
         let username = "";
 
         let userExists = true;
 
 
         /*
-           Unique username
+           UNIQUE USERNAME
         */
 
         for(
@@ -1198,11 +1376,6 @@ async function createNewUser(){
 
         /*
            EXACTLY 4 HOURS
-
-           4 hours
-           × 60 minutes
-           × 60 seconds
-           × 1000 milliseconds
         */
 
         const fourHours =
@@ -1211,13 +1384,6 @@ async function createNewUser(){
             60 *
             1000;
 
-
-        /*
-           NO 24 HOURS HERE
-           NO 1 DAY HERE
-
-           expire = now + exactly 4 hours
-        */
 
         const expire =
             now +
@@ -1275,7 +1441,7 @@ async function createNewUser(){
 
 
         /*
-           SAVE TO FIREBASE
+           SAVE USER
         */
 
         await usersRef
@@ -1284,8 +1450,7 @@ async function createNewUser(){
 
 
         /*
-           ONLY AFTER SUCCESS
-           LOCK THIS SESSION
+           LOCK SESSION
         */
 
         actionUsed =
@@ -1315,7 +1480,6 @@ async function createNewUser(){
         generateButton.disabled =
             true;
 
-
     }
 
     catch(errorObject){
@@ -1325,6 +1489,187 @@ async function createNewUser(){
 
 
         generateButton.disabled =
+            false;
+
+
+        error.innerText =
+            "Error: " +
+            errorObject.message;
+
+    }
+
+}
+
+
+/* =====================================================
+   GET KEY
+===================================================== */
+
+async function generateGetKey(){
+
+    if(actionUsed){
+
+        alert(
+            "This session has already been used."
+        );
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "getKeyGenerateButton"
+        );
+
+
+    const loading =
+        document.getElementById(
+            "getKeyLoading"
+        );
+
+
+    const error =
+        document.getElementById(
+            "getKeyError"
+        );
+
+
+    const result =
+        document.getElementById(
+            "getKeyResult"
+        );
+
+
+    error.innerText = "";
+
+
+    result.style.display =
+        "none";
+
+
+    button.disabled =
+        true;
+
+
+    loading.style.display =
+        "block";
+
+
+    try{
+
+        let uniqueKey = "";
+
+        let keyExists = true;
+
+
+        /*
+           UNIQUE KEY CHECK
+        */
+
+        for(
+            let attempt = 0;
+            attempt < 20;
+            attempt++
+        ){
+
+            uniqueKey =
+                generateGetKeyValue();
+
+
+            const snapshot =
+                await keysRef
+                .child(uniqueKey)
+                .get();
+
+
+            if(!snapshot.exists()){
+
+                keyExists =
+                    false;
+
+                break;
+
+            }
+
+        }
+
+
+        if(keyExists){
+
+            throw new Error(
+                "Unique key generate nahi ho paya."
+            );
+
+        }
+
+
+        /*
+           FIREBASE DATA
+
+           DetectivePanel/key/<uniqueKey>
+
+           key  = uniqueKey
+           time = "4"
+        */
+
+        const keyData = {
+
+            key:
+                uniqueKey,
+
+            time:
+                "4"
+
+        };
+
+
+        /*
+           SAVE KEY
+        */
+
+        await keysRef
+        .child(uniqueKey)
+        .set(keyData);
+
+
+        /*
+           ONLY AFTER FIREBASE SUCCESS
+           SESSION LOCK
+        */
+
+        actionUsed =
+            true;
+
+
+        document.getElementById(
+            "generatedKey"
+        ).innerText =
+            uniqueKey;
+
+
+        result.style.display =
+            "block";
+
+
+        loading.style.display =
+            "none";
+
+
+        button.disabled =
+            true;
+
+
+    }
+
+    catch(errorObject){
+
+        loading.style.display =
+            "none";
+
+
+        button.disabled =
             false;
 
 
@@ -1372,6 +1717,26 @@ function copyPassword(){
     copyText(
         password,
         "Password copied"
+    );
+
+}
+
+
+/* =====================================================
+   COPY GENERATED KEY
+===================================================== */
+
+function copyGeneratedKey(){
+
+    const key =
+        document.getElementById(
+            "generatedKey"
+        ).innerText;
+
+
+    copyText(
+        key,
+        "Key copied"
     );
 
 }
@@ -1740,7 +2105,6 @@ window.addEventListener(
            Refresh = new session
 
            Page 1 se start
-           actionUsed false
         */
 
         actionUsed =
