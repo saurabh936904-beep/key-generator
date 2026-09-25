@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,22 +98,6 @@ button:disabled{
     cursor:not-allowed;
 }
 
-input{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border-radius:10px;
-    border:1px solid #444;
-    background:#181818;
-    color:#fff;
-    font-size:16px;
-    outline:none;
-}
-
-input:focus{
-    border-color:#ffc107;
-}
-
 .hidden{
     display:none !important;
 }
@@ -171,29 +154,14 @@ input:focus{
 
 .success{
     color:#00e676;
-}
-
-.error{
-    color:#ff5252;
-}
-
-.vip{
-    color:#ffc107;
+    font-size:16px;
     font-weight:bold;
+    margin-bottom: 10px;
 }
 
 .small{
     font-size:13px;
     color:#888;
-}
-
-.back{
-    background:#222;
-    color:#fff;
-}
-
-.back:hover{
-    background:#333;
 }
 </style>
 </head>
@@ -204,34 +172,18 @@ input:focus{
 
 <!-- PAGE 1 -->
 <div class="card" id="page1">
-
     <h1>Detective Key</h1>
-
-    <p>
-        Welcome to Detective Key Generator.
-        Continue to proceed.
-    </p>
-
+    <p>Welcome to Detective Key Generator. Continue to proceed.</p>
     <div class="timer" id="timer1">5</div>
-
-    <button id="continue1" disabled onclick="showPage(2)">
-        Continue
-    </button>
-
+    <button id="continue1" disabled onclick="showPage(2)">Continue</button>
 </div>
-
 
 <!-- PAGE 2 -->
 <div class="card hidden" id="page2">
-
     <h2>Step 2</h2>
-
     <p>Please wait until the timer finishes.</p>
-
     <div class="timer" id="timer2">5</div>
-
     <div class="adbox">
-
         <script>
         atOptions = {
             'key' : 'a0ff1fee43166344bbe546eef861eacc',
@@ -241,29 +193,17 @@ input:focus{
             'params' : {}
         };
         </script>
-
         <script src="https://www.highrevenueformat.com/a0ff1fee43166344bbe546eef861eacc/invoke.js"></script>
-
     </div>
-
-    <button id="continue2" disabled onclick="showPage(3)">
-        Continue
-    </button>
-
+    <button id="continue2" disabled onclick="showPage(3)">Continue</button>
 </div>
-
 
 <!-- PAGE 3 -->
 <div class="card hidden" id="page3">
-
     <h2>Step 3</h2>
-
     <p>Please wait until the timer finishes.</p>
-
     <div class="timer" id="timer3">5</div>
-
     <div class="adbox">
-
         <script>
         atOptions = {
             'key' : '5027d5d3def8d9dcb238c403e4edf617',
@@ -273,29 +213,17 @@ input:focus{
             'params' : {}
         };
         </script>
-
         <script src="https://www.highrevenueformat.com/5027d5d3def8d9dcb238c403e4edf617/invoke.js"></script>
-
     </div>
-
-    <button id="continue3" disabled onclick="showPage(4)">
-        Continue
-    </button>
-
+    <button id="continue3" disabled onclick="showPage(4)">Continue</button>
 </div>
-
 
 <!-- PAGE 4 -->
 <div class="card hidden" id="page4">
-
     <h2>Step 4</h2>
-
     <p>Please wait until the timer finishes.</p>
-
     <div class="timer" id="timer4">5</div>
-
     <div class="adbox">
-
         <script>
         atOptions = {
             'key' : 'cd4c9d9e274e9e4ad00d888c1823737f',
@@ -305,29 +233,17 @@ input:focus{
             'params' : {}
         };
         </script>
-
         <script src="https://www.highrevenueformat.com/cd4c9d9e274e9e4ad00d888c1823737f/invoke.js"></script>
-
     </div>
-
-    <button id="continue4" disabled onclick="showPage(5)">
-        Continue
-    </button>
-
+    <button id="continue4" disabled onclick="showPage(5)">Continue</button>
 </div>
-
 
 <!-- PAGE 5 -->
 <div class="card hidden" id="page5">
-
     <h2>Step 5</h2>
-
     <p>Please wait until the timer finishes.</p>
-
     <div class="timer" id="timer5">5</div>
-
     <div class="adbox">
-
         <script>
         atOptions = {
             'key' : '35305d7d070cb0107c589a78c760b427',
@@ -337,141 +253,30 @@ input:focus{
             'params' : {}
         };
         </script>
-
         <script src="https://www.highrevenueformat.com/35305d7d070cb0107c589a78c760b427/invoke.js"></script>
-
     </div>
-
-    <button id="continue5" disabled onclick="showFinalPage()">
-        Continue
-    </button>
-
+    <button id="continue5" disabled onclick="showFinalPage()">Continue</button>
 </div>
 
-
-<!-- FINAL PAGE -->
+<!-- FINAL AUTO KEY PAGE -->
 <div class="card hidden" id="finalPage">
-
-    <h2>Detective Key</h2>
-
-    <p>
-        Choose an option
-    </p>
-
-    <button id="createButton" onclick="openCreatePage()">
-        CREATE NEW
-    </button>
-
-    <button id="extendButton" onclick="openExtendPage()">
-        EXIST / EXTEND TIME
-    </button>
-
-    <p class="small">
-        One successful action is allowed per session.
-        Refresh starts the process again.
-    </p>
-
-</div>
-
-
-<!-- CREATE PAGE -->
-<div class="card hidden" id="createPage">
-
-    <h2>Create New Key</h2>
-
-    <p>
-        A new key will be created for exactly
-        <b class="vip">4 hours</b>.
-    </p>
-
-    <button id="generateButton" onclick="createNewUser()">
-        CREATE KEY
-    </button>
-
-    <div id="createResult" class="result hidden">
-
-        <div class="success">
-            Key Created Successfully
-        </div>
-
+    <h2>Your Detective Key</h2>
+    <p>Your key has been successfully generated and saved.</p>
+    
+    <div id="autoKeyResult" class="result">
+        <div class="success">Key Generated Successfully!</div>
         <div class="keyrow">
-
-            <div class="label">
-                Username
-            </div>
-
+            <div class="label">Access Key</div>
             <div class="valuebox">
-
-                <div id="resultUsername" class="value"></div>
-
-                <button
-                    class="copybtn"
-                    onclick="copyText('resultUsername')">
-                    Copy
-                </button>
-
+                <div id="resultKeyText" class="value">Generating...</div>
+                <button class="copybtn" onclick="copyText('resultKeyText')">Copy</button>
             </div>
-
         </div>
-
-
-        <div class="keyrow">
-
-            <div class="label">
-                Password
-            </div>
-
-            <div class="valuebox">
-
-                <div id="resultPassword" class="value"></div>
-
-                <button
-                    class="copybtn"
-                    onclick="copyText('resultPassword')">
-                    Copy
-                </button>
-
-            </div>
-
-        </div>
-
-        <p class="small">
-            Validity: Exactly 4 Hours
-        </p>
-
     </div>
-
+    <p class="small" style="margin-top:15px;">One successful action per session. Refresh to generate a new one.</p>
 </div>
 
-
-<!-- EXTEND PAGE -->
-<div class="card hidden" id="extendPage">
-
-    <h2>Extend Key</h2>
-
-    <p>
-        Enter your existing username.
-        Normal key will be extended by exactly 4 hours.
-    </p>
-
-    <input
-        type="text"
-        id="extendUsername"
-        placeholder="Enter Username"
-        autocomplete="off"
-    >
-
-    <button id="extendButton2" onclick="extendTime()">
-        EXTEND +4 HOURS
-    </button>
-
-    <div id="extendResult" class="result hidden"></div>
-
 </div>
-
-
-</div>
-
 
 <script>
 
@@ -480,137 +285,77 @@ input:focus{
 ========================================================= */
 
 const firebaseConfig = {
-
     apiKey: "AIzaSyDxCzFBgmn_CTfv-EReAE8ifHH_Ab7Gztk",
-
     authDomain: "me-me-290a5.firebaseapp.com",
-
-    databaseURL:
-        "https://me-me-290a5-default-rtdb.firebaseio.com/",
-
+    databaseURL: "https://me-me-290a5-default-rtdb.firebaseio.com/",
     projectId: "me-me-290a5",
-
-    storageBucket:
-        "me-me-290a5.firebasestorage.app",
-
-    messagingSenderId:
-        "916593241654",
-
-    appId:
-        "1:916593241654:web:3997e3c2d4a324da3bb297",
-
-    measurementId:
-        "G-VCL5QDX8N5"
+    storageBucket: "me-me-290a5.firebasestorage.app",
+    messagingSenderId: "916593241654",
+    appId: "1:916593241654:web:3997e3c2d4a324da3bb297",
+    measurementId: "G-VCL5QDX8N5"
 };
-
 
 firebase.initializeApp(firebaseConfig);
 
-
-const database =
-    firebase.database();
-
-
-const usersRef =
-    database.ref("DetectivePanel/User");
-
+const database = firebase.database();
+const keysRef = database.ref("DetectivePanel/key");
 
 /* =========================================================
-   FIREBASE SERVER TIME SYNC
+   SERVER TIME SYNC
 ========================================================= */
 
-const serverTimeOffsetRef =
-    database.ref(".info/serverTimeOffset");
-
-
+const serverTimeOffsetRef = database.ref(".info/serverTimeOffset");
 let serverOffset = 0;
-
+let serverOffsetLoaded = false;
 
 serverTimeOffsetRef.on("value", function(snapshot){
-
     const value = snapshot.val();
-
     if(typeof value === "number"){
         serverOffset = value;
+        serverOffsetLoaded = true;
     }
-
 });
 
-
-// Direct Synchronous Server Time Function (Milliseconds)
-function getSyncServerTime(){
+async function getOnlineTime(){
+    let attempts = 0;
+    while(!serverOffsetLoaded && attempts < 20){
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+    }
     return Date.now() + serverOffset;
 }
 
-
-/* =========================================================
-   SESSION ACTION LOCK
-========================================================= */
-
 let actionUsed = false;
 
-
 /* =========================================================
-   PAGE FUNCTIONS
+   PAGES
 ========================================================= */
 
 function hideAllPages(){
-
-    const pages = [
-
-        "page1",
-        "page2",
-        "page3",
-        "page4",
-        "page5",
-        "finalPage",
-        "createPage",
-        "extendPage"
-
-    ];
-
-
+    const pages = ["page1", "page2", "page3", "page4", "page5", "finalPage"];
     for(let i = 0; i < pages.length; i++){
-
-        document
-            .getElementById(pages[i])
-            .classList.add("hidden");
-
+        document.getElementById(pages[i]).classList.add("hidden");
     }
-
 }
-
 
 function showPage(number){
-
     hideAllPages();
-
-    const page =
-        document.getElementById("page" + number);
-
+    const page = document.getElementById("page" + number);
     if(page){
-
         page.classList.remove("hidden");
-
         startTimer(number);
-
     }
-
 }
 
-
-function showFinalPage(){
-
+async function showFinalPage(){
     hideAllPages();
+    document.getElementById("finalPage").classList.remove("hidden");
 
-    document
-        .getElementById("finalPage")
-        .classList.remove("hidden");
-
-    updateFinalButtons();
-
+    if(!actionUsed){
+        actionUsed = true;
+        await generateAndSaveAutoKey();
+    }
 }
-
 
 /* =========================================================
    TIMER
@@ -618,641 +363,123 @@ function showFinalPage(){
 
 const timerStarted = {};
 
-
 function startTimer(pageNumber){
-
-    if(timerStarted[pageNumber]){
-        return;
-    }
-
-
+    if(timerStarted[pageNumber]) return;
     timerStarted[pageNumber] = true;
 
-
     let seconds = 5;
+    const timerElement = document.getElementById("timer" + pageNumber);
+    const continueButton = document.getElementById("continue" + pageNumber);
 
-
-    const timerElement =
-        document.getElementById("timer" + pageNumber);
-
-
-    const continueButton =
-        document.getElementById("continue" + pageNumber);
-
-
-    if(!timerElement || !continueButton){
-        return;
-    }
-
+    if(!timerElement || !continueButton) return;
 
     timerElement.textContent = seconds;
-
-
     continueButton.disabled = true;
 
-
-    const interval =
-        setInterval(function(){
-
-            seconds--;
-
-
-            timerElement.textContent = seconds;
-
-
-            if(seconds <= 0){
-
-                clearInterval(interval);
-
-
-                timerElement.textContent = "✓";
-
-
-                continueButton.disabled = false;
-
-            }
-
-        },1000);
-
+    const interval = setInterval(function(){
+        seconds--;
+        timerElement.textContent = seconds;
+        if(seconds <= 0){
+            clearInterval(interval);
+            timerElement.textContent = "✓";
+            continueButton.disabled = false;
+        }
+    }, 1000);
 }
-
-
-/* =========================================================
-   FINAL BUTTON LOCK
-========================================================= */
-
-function updateFinalButtons(){
-
-    const createButton =
-        document.getElementById("createButton");
-
-    const extendButton =
-        document.getElementById("extendButton");
-
-
-    if(actionUsed){
-
-        createButton.disabled = true;
-
-        extendButton.disabled = true;
-
-    }else{
-
-        createButton.disabled = false;
-
-        extendButton.disabled = false;
-
-    }
-
-}
-
-
-/* =========================================================
-   CREATE PAGE
-========================================================= */
-
-function openCreatePage(){
-
-    if(actionUsed){
-
-        alert("You have already used your action.");
-
-        return;
-
-    }
-
-
-    hideAllPages();
-
-
-    document
-        .getElementById("createPage")
-        .classList.remove("hidden");
-
-}
-
-
-/* =========================================================
-   EXTEND PAGE
-========================================================= */
-
-function openExtendPage(){
-
-    if(actionUsed){
-
-        alert("You have already used your action.");
-
-        return;
-
-    }
-
-
-    hideAllPages();
-
-
-    document
-        .getElementById("extendPage")
-        .classList.remove("hidden");
-
-}
-
 
 /* =========================================================
    RANDOM ALPHANUMERIC
 ========================================================= */
 
 function randomAlphaNumeric(length){
-
-    const chars =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
-
-
     for(let i = 0; i < length; i++){
-
-        result +=
-            chars.charAt(
-                Math.floor(
-                    Math.random() * chars.length
-                )
-            );
-
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-
-
     return result;
-
 }
 
-
 /* =========================================================
-   CREATE NEW USER
+   AUTO GENERATE & SAVE KEY FUNCTION
 ========================================================= */
 
-async function createNewUser(){
-
-    if(actionUsed){
-
-        alert("Action already used. Refresh the page to create another key.");
-
-        return;
-
-    }
-
-
-    const button =
-        document.getElementById("generateButton");
-
-
-    button.disabled = true;
-
-
-    try{
-
-        let username;
-
-
+async function generateAndSaveAutoKey(){
+    try {
+        let finalKeyName;
         let exists = true;
 
-
+        // Ensure unique 16-character key
         while(exists){
-
-            username =
-                "Detective" +
-                randomAlphaNumeric(6);
-
-
-            const check =
-                await usersRef
-                    .child(username)
-                    .get();
-
-
-            exists =
-                check.exists();
-
+            finalKeyName = "Detective_" + randomAlphaNumeric(16);
+            const check = await keysRef.child(finalKeyName).get();
+            exists = check.exists();
         }
 
-
-        const password =
-            randomAlphaNumeric(6);
-
-
-        /*
-         * STRICT MILLISECONDS SERVER TIME
-         */
-
-        const now =
-            getSyncServerTime();
-
-
-        /*
-         * EXACTLY 4 HOURS IN MILLISECONDS (4 * 3600 * 1000 = 14400000)
-         */
-
-        const fourHours =
-            4 * 60 * 60 * 1000;
-
-
-        const expire =
-            now + fourHours;
-
-
-        /*
-         * Firebase data
-         */
+        const now = await getOnlineTime();
+        const fourHours = 4 * 60 * 60 * 1000;
+        const expire = now + fourHours;
 
         const data = {
-
-            username: username,
-
-            password: password,
-
-            device: "1",
-
+            key: finalKeyName,
             create: String(now),
-
-            deactivate: String(now),
-
             expire: String(expire),
-
-            activate: true,
-
-            hack: true,
-
-            loc: true,
-
-            hack_loc: true,
-
-            hack70: true,
-
-            hack80: true,
-
-            hack90: true,
-
-            hack100: true,
-
-            hack110: true
-
+            activate: true
         };
 
+        // Save directly to DetectivePanel/key
+        await keysRef.child(finalKeyName).set(data);
 
-        /*
-         * Save
-         */
+        // Display key on screen
+        document.getElementById("resultKeyText").textContent = finalKeyName;
 
-        await usersRef
-            .child(username)
-            .set(data);
-
-
-        /*
-         * LOCK ACTION
-         */
-
-        actionUsed = true;
-
-
-        /*
-         * Show result
-         */
-
-        document
-            .getElementById("resultUsername")
-            .textContent = username;
-
-
-        document
-            .getElementById("resultPassword")
-            .textContent = password;
-
-
-        document
-            .getElementById("createResult")
-            .classList.remove("hidden");
-
-
-        button.disabled = true;
-
-
-        updateFinalButtons();
-
-
-    }catch(error){
-
+    } catch (error) {
         console.error(error);
-
-
-        alert(
-            "Key create nahi hua:\n" +
-            error.message
-        );
-
-
-        button.disabled = false;
-
+        document.getElementById("resultKeyText").textContent = "Error generating key!";
     }
-
 }
 
-
 /* =========================================================
-   EXTEND TIME
-========================================================= */
-
-async function extendTime(){
-
-    if(actionUsed){
-
-        alert(
-            "Action already used. Refresh the page to try again."
-        );
-
-        return;
-
-    }
-
-
-    const input =
-        document.getElementById("extendUsername");
-
-
-    const username =
-        input.value.trim();
-
-
-    const result =
-        document.getElementById("extendResult");
-
-
-    if(username.length === 0){
-
-        alert("Username enter karo.");
-
-        return;
-
-    }
-
-
-    const button =
-        document.getElementById("extendButton2");
-
-
-    button.disabled = true;
-
-
-    result.classList.add("hidden");
-
-
-    try{
-
-        const userRef =
-            usersRef.child(username);
-
-
-        const snapshot =
-            await userRef.get();
-
-
-        if(!snapshot.exists()){
-
-            throw new Error(
-                "Username not found."
-            );
-
-        }
-
-
-        const data =
-            snapshot.val();
-
-
-        const expireValue =
-            data.expire;
-
-
-        if(
-            String(expireValue)
-                .trim()
-                .toLowerCase()
-            ===
-            "unlimited"
-        ){
-
-            result.innerHTML =
-                '<div class="vip">' +
-                'VIP KEY' +
-                '</div>' +
-                '<p>' +
-                'Is username ka expire Unlimited hai. ' +
-                'VIP key ka time extend nahi kiya ja sakta.' +
-                '</p>';
-
-
-            result.classList.remove("hidden");
-
-
-            button.disabled = true;
-
-            return;
-
-        }
-
-
-        const oldExpire =
-            parseInt(expireValue, 10);
-
-
-        if(isNaN(oldExpire)){
-
-            throw new Error(
-                "Invalid expire value."
-            );
-
-        }
-
-
-        const now =
-            getSyncServerTime();
-
-
-        /*
-         * EXACTLY 4 HOURS
-         */
-
-        const fourHours =
-            4 * 60 * 60 * 1000;
-
-
-        let newExpire;
-
-
-        if(oldExpire <= now){
-
-            newExpire =
-                now + fourHours;
-
-        }else{
-
-            newExpire =
-                oldExpire + fourHours;
-
-        }
-
-
-        await userRef.update({
-
-            expire: String(newExpire),
-
-            deactivate: String(now)
-
-        });
-
-
-        actionUsed = true;
-
-
-        result.innerHTML =
-            '<div class="success">' +
-            'KEY EXTENDED SUCCESSFULLY' +
-            '</div>' +
-            '<p>' +
-            'Username: <b>' +
-            escapeHtml(username) +
-            '</b>' +
-            '</p>' +
-            '<p>' +
-            'Exactly +4 Hours added.' +
-            '</p>';
-
-
-        result.classList.remove("hidden");
-
-
-        updateFinalButtons();
-
-
-    }catch(error){
-
-        console.error(error);
-
-
-        result.innerHTML =
-            '<div class="error">' +
-            escapeHtml(error.message) +
-            '</div>';
-
-
-        result.classList.remove("hidden");
-
-
-        button.disabled = false;
-
-    }
-
-}
-
-
-/* =========================================================
-   COPY
+   COPY & ESCAPE UTILS
 ========================================================= */
 
 function copyText(elementId){
+    const element = document.getElementById(elementId);
+    const text = element.textContent;
 
-    const element =
-        document.getElementById(elementId);
+    if(text === "Generating..." || text === "Error generating key!") return;
 
-
-    const text =
-        element.textContent;
-
-
-    if(
-        navigator.clipboard &&
-        navigator.clipboard.writeText
-    ){
-
-        navigator.clipboard
-            .writeText(text)
-            .then(function(){
-
-                alert("Copied!");
-
-            })
-            .catch(function(){
-
-                fallbackCopy(text);
-
-            });
-
+    if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){
+            alert("Copied!");
+        }).catch(function(){
+            fallbackCopy(text);
+        });
     }else{
-
         fallbackCopy(text);
-
     }
-
 }
-
 
 function fallbackCopy(text){
-
-    const textarea =
-        document.createElement("textarea");
-
-
+    const textarea = document.createElement("textarea");
     textarea.value = text;
-
-
     document.body.appendChild(textarea);
-
-
     textarea.select();
-
-
     try{
-
         document.execCommand("copy");
-
         alert("Copied!");
-
     }catch(error){
-
-        alert("Copy failed. Manually copy it.");
-
+        alert("Copy failed.");
     }
-
-
     document.body.removeChild(textarea);
-
 }
-
-
-/* =========================================================
-   HTML ESCAPE
-========================================================= */
-
-function escapeHtml(value){
-
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
 
 /* =========================================================
    START PAGE 1
 ========================================================= */
 
-window.addEventListener("load",function(){
-
+window.addEventListener("load", function(){
     startTimer(1);
-
 });
 
 </script>
