@@ -7,7 +7,6 @@
 
 <title>Detective Key Generator</title>
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
@@ -253,9 +252,6 @@ input:focus{
             Please wait for the timer to finish.
         </p>
 
-
-        <!-- 160x300 AD -->
-
         <div class="adbox">
 
             <script>
@@ -271,7 +267,6 @@ input:focus{
             <script src="https://www.highrevenueformat.com/a0ff1fee43166344bbe546eef861eacc/invoke.js"></script>
 
         </div>
-
 
         <button
             id="continue2"
@@ -307,9 +302,6 @@ input:focus{
             Continue after the timer finishes.
         </p>
 
-
-        <!-- 300x250 AD -->
-
         <div class="adbox">
 
             <script>
@@ -325,7 +317,6 @@ input:focus{
             <script src="https://www.highrevenueformat.com/5027d5d3def8d9dcb238c403e4edf617/invoke.js"></script>
 
         </div>
-
 
         <button
             id="continue3"
@@ -361,9 +352,6 @@ input:focus{
             Almost there. Wait and continue.
         </p>
 
-
-        <!-- 468x60 AD -->
-
         <div class="adbox">
 
             <script>
@@ -379,7 +367,6 @@ input:focus{
             <script src="https://www.highrevenueformat.com/cd4c9d9e274e9e4ad00d888c1823737f/invoke.js"></script>
 
         </div>
-
 
         <button
             id="continue4"
@@ -415,9 +402,6 @@ input:focus{
             Final step. Wait for the timer.
         </p>
 
-
-        <!-- 728x90 AD -->
-
         <div class="adbox">
 
             <script>
@@ -433,7 +417,6 @@ input:focus{
             <script src="https://www.highrevenueformat.com/35305d7d070cb0107c589a78c760b427/invoke.js"></script>
 
         </div>
-
 
         <button
             id="continue5"
@@ -473,25 +456,18 @@ input:focus{
             You can perform only one action.
         </p>
 
-
         <button
             id="createButton"
             onclick="openCreatePage()">
-
             CREATE NEW
-
         </button>
-
 
         <button
             id="extendButton"
             class="secondary"
             onclick="openExtendPage()">
-
             EXIST / EXTEND TIME
-
         </button>
-
 
         <div
             id="lockMessage"
@@ -521,9 +497,8 @@ input:focus{
 
         <p>
             New username and password will be generated.
-            Key validity: 4 hours.
+            Key validity: exactly 4 hours.
         </p>
-
 
         <button
             id="generateButton"
@@ -532,7 +507,6 @@ input:focus{
             CREATE NEW KEY
 
         </button>
-
 
         <div
             id="createLoading"
@@ -543,17 +517,14 @@ input:focus{
 
         </div>
 
-
         <div
             id="createError"
             class="error">
         </div>
 
-
         <div
             id="createResult"
             class="result">
-
 
             <label>
                 Username
@@ -564,7 +535,6 @@ input:focus{
                 class="value">
             </div>
 
-
             <button
                 class="secondary copybtn"
                 onclick="copyUsername()">
@@ -572,7 +542,6 @@ input:focus{
                 COPY USERNAME
 
             </button>
-
 
             <label>
                 Password
@@ -583,7 +552,6 @@ input:focus{
                 class="value">
             </div>
 
-
             <button
                 class="secondary copybtn"
                 onclick="copyPassword()">
@@ -592,11 +560,10 @@ input:focus{
 
             </button>
 
-
             <div class="success">
 
                 Key created successfully.
-                Valid for 4 hours.
+                Valid for exactly 4 hours.
 
             </div>
 
@@ -624,13 +591,11 @@ input:focus{
             4 hours will be added.
         </p>
 
-
         <input
             id="extendUsername"
             type="text"
             placeholder="Enter your username"
             autocomplete="off">
-
 
         <button
             id="extendButton2"
@@ -639,7 +604,6 @@ input:focus{
             EXTEND TIME
 
         </button>
-
 
         <div
             id="extendLoading"
@@ -650,12 +614,10 @@ input:focus{
 
         </div>
 
-
         <div
             id="extendError"
             class="error">
         </div>
-
 
         <div
             id="extendSuccess"
@@ -673,7 +635,7 @@ input:focus{
 <script>
 
 /* =====================================================
-   FIREBASE CONFIG
+   FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
@@ -754,14 +716,14 @@ function getServerTime(){
 
 
 /* =====================================================
-   CURRENT SESSION
+   SESSION
 ===================================================== */
 
 let actionUsed = false;
 
 
 /* =====================================================
-   PAGE SHOW
+   SHOW PAGE
 ===================================================== */
 
 function showPage(pageId){
@@ -804,42 +766,33 @@ function showPage(pageId){
 
 function goPage(number){
 
-
     if(number === 2){
 
         showPage("page2");
-
         startTimer(2);
 
     }
 
-
     else if(number === 3){
 
         showPage("page3");
-
         startTimer(3);
 
     }
 
-
     else if(number === 4){
 
         showPage("page4");
-
         startTimer(4);
 
     }
 
-
     else if(number === 5){
 
         showPage("page5");
-
         startTimer(5);
 
     }
-
 
     else if(number === 6){
 
@@ -851,7 +804,7 @@ function goPage(number){
 
 
 /* =====================================================
-   TIMER
+   5 SECOND TIMER
 ===================================================== */
 
 const timerRunning = {};
@@ -909,7 +862,6 @@ function startTimer(pageNumber){
         setInterval(
             function(){
 
-
                 seconds--;
 
 
@@ -954,7 +906,6 @@ function startTimer(pageNumber){
                     ] = false;
 
                 }
-
 
             },
             1000
@@ -1068,7 +1019,7 @@ function openExtendPage(){
 
 
 /* =====================================================
-   RANDOM ALPHANUMERIC
+   RANDOM CHARACTERS
 ===================================================== */
 
 function randomCharacters(length){
@@ -1103,9 +1054,10 @@ function randomCharacters(length){
 
 
 /* =====================================================
-   GENERATED USERNAME
-   Detective + 6 random
-   = 15 characters
+   CREATE USERNAME
+   Detective = 9
+   Random = 6
+   Total = 15
 ===================================================== */
 
 function generateUsername(){
@@ -1117,8 +1069,7 @@ function generateUsername(){
 
 
 /* =====================================================
-   GENERATED PASSWORD
-   6 CHARACTERS
+   CREATE PASSWORD
 ===================================================== */
 
 function generatePassword(){
@@ -1193,7 +1144,7 @@ async function createNewUser(){
 
 
         /*
-           Unique username check
+           Unique username
         */
 
         for(
@@ -1201,7 +1152,6 @@ async function createNewUser(){
             attempt < 20;
             attempt++
         ){
-
 
             username =
                 generateUsername();
@@ -1238,12 +1188,21 @@ async function createNewUser(){
             generatePassword();
 
 
+        /*
+           CURRENT FIREBASE SERVER TIME
+        */
+
         const now =
             getServerTime();
 
 
         /*
-           4 HOURS
+           EXACTLY 4 HOURS
+
+           4 hours
+           × 60 minutes
+           × 60 seconds
+           × 1000 milliseconds
         */
 
         const fourHours =
@@ -1252,6 +1211,13 @@ async function createNewUser(){
             60 *
             1000;
 
+
+        /*
+           NO 24 HOURS HERE
+           NO 1 DAY HERE
+
+           expire = now + exactly 4 hours
+        */
 
         const expire =
             now +
@@ -1308,14 +1274,18 @@ async function createNewUser(){
         };
 
 
+        /*
+           SAVE TO FIREBASE
+        */
+
         await usersRef
         .child(username)
-        .update(data);
+        .set(data);
 
 
         /*
-           Successful Firebase operation
-           ke baad session lock
+           ONLY AFTER SUCCESS
+           LOCK THIS SESSION
         */
 
         actionUsed =
@@ -1349,7 +1319,6 @@ async function createNewUser(){
     }
 
     catch(errorObject){
-
 
         loading.style.display =
             "none";
@@ -1409,7 +1378,7 @@ function copyPassword(){
 
 
 /* =====================================================
-   COPY TEXT
+   COPY
 ===================================================== */
 
 function copyText(
@@ -1421,7 +1390,6 @@ function copyText(
         navigator.clipboard &&
         navigator.clipboard.writeText
     ){
-
 
         navigator.clipboard
         .writeText(text)
@@ -1439,7 +1407,6 @@ function copyText(
 
             }
         );
-
 
     }
 
@@ -1571,16 +1538,8 @@ async function extendTime(){
 
 
     /*
-       NO LENGTH RESTRICTION
-
-       Premium username:
-       5 characters
-       15 characters
-       20 characters
-       50 characters
-       etc.
-
-       Sirf Firebase me exist karna chahiye.
+       Premium username ki
+       koi length restriction nahi.
     */
 
     if(username.length === 0){
@@ -1627,12 +1586,16 @@ async function extendTime(){
             snapshot.val();
 
 
+        /*
+           CURRENT SERVER TIME
+        */
+
         const now =
             getServerTime();
 
 
         /*
-           4 HOURS
+           EXACTLY 4 HOURS
         */
 
         const fourHours =
@@ -1662,62 +1625,36 @@ async function extendTime(){
 
 
         /*
-           ACTIVATE TRUE
+           EXPIRED
+           current server time + 4 hours
         */
 
-        if(
-            data.activate === true
-        ){
+        if(oldExpire <= now){
 
-
-            if(
-                oldExpire <= now
-            ){
-
-                newExpire =
-                    now +
-                    fourHours;
-
-            }
-
-            else{
-
-                newExpire =
-                    oldExpire +
-                    fourHours;
-
-            }
+            newExpire =
+                now +
+                fourHours;
 
         }
 
 
         /*
-           ACTIVATE FALSE
+           NOT EXPIRED
+           existing expire + 4 hours
         */
 
         else{
 
-
-            if(
-                oldExpire <= now
-            ){
-
-                newExpire =
-                    now +
-                    fourHours;
-
-            }
-
-            else{
-
-                newExpire =
-                    oldExpire +
-                    fourHours;
-
-            }
+            newExpire =
+                oldExpire +
+                fourHours;
 
         }
 
+
+        /*
+           UPDATE FIREBASE
+        */
 
         await userRef.update({
 
@@ -1735,8 +1672,7 @@ async function extendTime(){
 
 
         /*
-           Successful extend ke baad
-           current session lock
+           SUCCESS
         */
 
         actionUsed =
@@ -1758,7 +1694,6 @@ async function extendTime(){
     }
 
     catch(errorObject){
-
 
         loading.style.display =
             "none";
@@ -1786,10 +1721,10 @@ window.addEventListener(
     function(){
 
         /*
-           Refresh par:
-           1. Page 1
-           2. actionUsed false
-           3. Final page par new action
+           Refresh = new session
+
+           Page 1 se start
+           actionUsed false
         */
 
         actionUsed =
